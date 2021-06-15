@@ -12,7 +12,7 @@ public class CreateTweetDelegate implements JavaDelegate {
     private final Logger LOGGER = LoggerFactory.getLogger(CreateTweetDelegate.class.getName());
 
     public void execute(DelegateExecution execution) throws Exception {
-        String content = "I did it! Cheers, Tim!";
+        String content = (String) execution.getVariable("content");
         LOGGER.info("Publishing tweet: " + content);
         AccessToken accessToken = new AccessToken("220324559-jet1dkzhSOeDWdaclI48z5txJRFLCnLOK45qStvo", "B28Ze8VDucBdiE38aVQqTxOyPc7eHunxBVv7XgGim4say");
         Twitter twitter = new TwitterFactory().getInstance();

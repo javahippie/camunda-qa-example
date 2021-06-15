@@ -4,7 +4,7 @@
     <bpmn:endEvent id="Event_PostPublished" name="Post erstellt">
       <bpmn:incoming>Flow_1ld1nx5</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:startEvent id="Event_PostWritten" name="Post erstellt">
+    <bpmn:startEvent id="Event_PostWritten" name="Post erstellt" camunda:formKey="embedded:app:forms/start-form.html">
       <bpmn:outgoing>Flow_0b8kn38</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="Event_PostRejected" name="Post nicht erstellt">
@@ -25,10 +25,6 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0e70zj6" sourceRef="Activity_InformEmployee" targetRef="Event_PostRejected" />
-    <bpmn:manualTask id="Activity_CheckPost" name="Post prüfen">
-      <bpmn:incoming>Flow_0b8kn38</bpmn:incoming>
-      <bpmn:outgoing>Flow_0be6v4q</bpmn:outgoing>
-    </bpmn:manualTask>
     <bpmn:scriptTask id="Activity_InformEmployee" name="Mitarbeiter informieren" scriptFormat="javascript">
       <bpmn:incoming>Flow_0pjreol</bpmn:incoming>
       <bpmn:outgoing>Flow_0e70zj6</bpmn:outgoing>
@@ -38,6 +34,10 @@
       <bpmn:incoming>Flow_0qg4izx</bpmn:incoming>
       <bpmn:outgoing>Flow_1ld1nx5</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_CheckPost" name="Post prüfen" camunda:formKey="embedded:app:forms/review-form.html" camunda:candidateGroups="management">
+      <bpmn:incoming>Flow_0b8kn38</bpmn:incoming>
+      <bpmn:outgoing>Flow_0be6v4q</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_TweetApproval">
@@ -53,7 +53,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0be6v4q_di" bpmnElement="Flow_0be6v4q">
-        <di:waypoint x="380" y="90" />
+        <di:waypoint x="381" y="90" />
         <di:waypoint x="425" y="90" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0qg4izx_di" bpmnElement="Flow_0qg4izx">
@@ -66,7 +66,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0b8kn38_di" bpmnElement="Flow_0b8kn38">
         <di:waypoint x="227" y="90" />
-        <di:waypoint x="280" y="90" />
+        <di:waypoint x="281" y="90" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ld1nx5_di" bpmnElement="Flow_1ld1nx5">
         <di:waypoint x="650" y="200" />
@@ -96,14 +96,14 @@
           <dc:Bounds x="428" y="41" width="43" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_16zxhat_di" bpmnElement="Activity_CheckPost">
-        <dc:Bounds x="280" y="50" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1lodhvq_di" bpmnElement="Activity_InformEmployee">
         <dc:Bounds x="550" y="50" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1wy0txg_di" bpmnElement="Activity_PublishPost">
         <dc:Bounds x="550" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ncivko_di" bpmnElement="Activity_CheckPost">
+        <dc:Bounds x="281" y="50" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
