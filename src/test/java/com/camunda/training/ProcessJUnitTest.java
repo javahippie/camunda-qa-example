@@ -3,7 +3,9 @@ package com.camunda.training;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
+import org.camunda.bpm.extension.process_test_coverage.junit.rules.TestCoverageProcessEngineRuleBuilder;
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -16,7 +18,8 @@ import static org.assertj.core.api.Assertions.*;
 public class ProcessJUnitTest {
 
   @Rule
-  public ProcessEngineRule rule = new ProcessEngineRule();
+  @ClassRule
+  public static ProcessEngineRule rule = TestCoverageProcessEngineRuleBuilder.create().build();
 
   @Before
   public void setup() {
@@ -29,6 +32,7 @@ public class ProcessJUnitTest {
     // Create a HashMap to put in variables for the process instance
     Map<String, Object> variables = new HashMap<>();
     variables.put("approved", true);
+    variables.put("content", "Yay, a Tweet!");
     // Start process with Java API and variables
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("Process_TweetApproval", variables);
     // Make assertions on the process instance
