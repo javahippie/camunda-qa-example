@@ -28,7 +28,7 @@ public class ProcessJUnitTest {
   public void testHappyPath() {
     // Create a HashMap to put in variables for the process instance
     Map<String, Object> variables = new HashMap<>();
-    variables.put("postOkay", true);
+    variables.put("approved", true);
     // Start process with Java API and variables
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("Process_TweetApproval", variables);
     // Make assertions on the process instance

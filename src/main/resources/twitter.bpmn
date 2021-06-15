@@ -18,11 +18,11 @@
     <bpmn:sequenceFlow id="Flow_1ld1nx5" sourceRef="Activity_PublishPost" targetRef="Event_PostPublished" />
     <bpmn:sequenceFlow id="Flow_0b8kn38" sourceRef="Event_PostWritten" targetRef="Activity_CheckPost" />
     <bpmn:sequenceFlow id="Flow_0qg4izx" name="ok" sourceRef="Gateway_PostOkay" targetRef="Activity_PublishPost">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${postOkay}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0be6v4q" sourceRef="Activity_CheckPost" targetRef="Gateway_PostOkay" />
     <bpmn:sequenceFlow id="Flow_0pjreol" name="nicht ok" sourceRef="Gateway_PostOkay" targetRef="Activity_InformEmployee">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not postOkay}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not approved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0e70zj6" sourceRef="Activity_InformEmployee" targetRef="Event_PostRejected" />
     <bpmn:manualTask id="Activity_CheckPost" name="Post prüfen">
